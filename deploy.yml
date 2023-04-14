@@ -1,14 +1,10 @@
 ---
-- name: Deploy custom WAR file
-  remote_user: labsuser
-  become: true
-  hosts: all
+- hosts: buildserver
+  vars:
+  - warName: calculator.war
+  - tomcat_version: 9.0.73
+  - warRemotePath: /usr/local/tomcat/webapps
+
   tasks:
-    - name: Copy WAR file to web container
-      copy:
-        src: target/calculator.war
-        dest: /usr/local/tomcat/webapps/calculator.war
-    - name: Restart web container
-      service:
-        name: tomcat
-        state: restarted
+  - name: Copy WAR to Remote server
+    copy: src=target/{{ warName }} dest={{ warRemotePath }}/{{ warName }} owner=labsuser
