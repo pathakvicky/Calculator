@@ -1,6 +1,6 @@
 ---
 - name: Deploy custom WAR file
-  hosts: deployment_server
+  hosts: all
   tasks:
     - name: Copy WAR file to web container
       copy:
