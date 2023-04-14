@@ -1,5 +1,6 @@
 ---
 - name: Deploy custom WAR file
+  remote_user: labsuser
   become: true
   hosts: all
   tasks:
