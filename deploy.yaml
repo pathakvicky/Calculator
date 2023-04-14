@@ -1,0 +1,12 @@
+---
+- name: Deploy custom WAR file
+  hosts: deployment_server
+  tasks:
+    - name: Copy WAR file to web container
+      copy:
+        src: target/calculator.war
+        dest: /usr/local/tomcat/webapps/calculator.war
+    - name: Restart web container
+      service:
+        name: tomcat
+        state: restarted
