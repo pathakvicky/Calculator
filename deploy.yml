@@ -1,5 +1,5 @@
 ---
-- hosts: buildserver
+- hosts: all
   vars:
   - warName: calculator.war
   - tomcat_version: 9.0.73
