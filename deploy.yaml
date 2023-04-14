@@ -1,5 +1,6 @@
 ---
 - name: Deploy custom WAR file
+  become: true
   hosts: all
   tasks:
     - name: Copy WAR file to web container
