@@ -1,11 +1,10 @@
 ---
-- hosts: all
-  remote_user: ansible
+- hosts: buildserver
   vars:
   - warName: calculator.war
   - tomcat_version: 9.0.73
-  - warRemotePath: /usr/local/tomcat/webapps
+  - warRemotePath: /opt/apache-tomcat-{{ tomcat_version }}/webapps
 
   tasks:
   - name: Copy WAR to Remote server
-    copy: src=./.war dest={{ warRemotePath }}/{{ warName }}
+    copy: src=target/{{ warName }} dest={{ warRemotePath }}/{{ warName }} owner=tomcat group=tomcat
