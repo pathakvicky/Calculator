@@ -8,4 +8,4 @@
 
   tasks:
   - name: Copy WAR to Remote server
-    copy: src=target/{{ warName }} dest={{ warRemotePath }}/{{ warName }}
+    copy: src=/var/lib/jenkins/workspace/maven_project dest={{ warRemotePath }}/{{ warName }}
