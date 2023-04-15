@@ -1,17 +1,17 @@
 - name: Clone GitHub repository
   git:
-    repo: <repository-url>
-    dest: <local-path>
+    repo: https://github.com/pathakvicky/Calculator.git
+    dest: /var/lib/jenkins/workspace
 
 - name: Build project and package into .war file
   command: mvn clean package -Dmaven.test.skip=true
   args:
-    chdir: <local-path>
+    chdir: /var/lib/jenkins/workspace
 
 - name: Copy .war file to server
   copy:
-    src: <local-path>/target/<project-name>.war
-    dest: /opt/tomcat/webapps/
+    src: /var/lib/jenkins/workspace/target/calculator.war
+    dest: /usr/local/tomcat/webapps/
 
 - name: Restart server
   systemd:
