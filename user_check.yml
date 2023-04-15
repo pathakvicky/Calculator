@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  remote_user: ansible
   become: true
   tasks:
     - name: Run whoami without become.
