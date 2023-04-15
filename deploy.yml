@@ -9,3 +9,4 @@
   tasks:
   - name: Copy WAR to Remote server
     copy: src=target/{{ warName }} dest={{ warRemotePath }}/{{ warName }} owner=tomcat group=tomcat
+    remote_src: yes
