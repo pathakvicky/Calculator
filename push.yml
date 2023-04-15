@@ -1,19 +1,23 @@
-- name: Clone GitHub repository
-  git:
-    repo: https://github.com/pathakvicky/Calculator.git
-    dest: /var/lib/jenkins/workspace
+---
+- hosts: all
+  remote_user: ansible
+  tasks:
+    - name: Clone GitHub repository
+      git:
+        repo: https://github.com/pathakvicky/Calculator.git
+        dest: /var/lib/jenkins/workspace
 
-- name: Build project and package into .war file
-  command: mvn clean package -Dmaven.test.skip=true
-  args:
-    chdir: /var/lib/jenkins/workspace
+    - name: Build project and package into .war file
+      command: mvn clean package -Dmaven.test.skip=true
+      args:
+        chdir: /var/lib/jenkins/workspace
 
-- name: Copy .war file to server
-  copy:
-    src: /var/lib/jenkins/workspace/target/calculator.war
-    dest: /usr/local/tomcat/webapps/
+    - name: Copy .war file to server
+      copy:
+        src: /var/lib/jenkins/workspace/target/calculator.war
+        dest: /usr/local/tomcat/webapps/
 
-- name: Restart server
-  systemd:
-    name: tomcat
-    state: restarted
+    - name: Restart server
+      systemd:
+        name: tomcat
+        state: restarted
