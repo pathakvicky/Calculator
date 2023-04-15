@@ -1,0 +1,19 @@
+- name: Clone GitHub repository
+  git:
+    repo: <repository-url>
+    dest: <local-path>
+
+- name: Build project and package into .war file
+  command: mvn clean package -Dmaven.test.skip=true
+  args:
+    chdir: <local-path>
+
+- name: Copy .war file to server
+  copy:
+    src: <local-path>/target/<project-name>.war
+    dest: /opt/tomcat/webapps/
+
+- name: Restart server
+  systemd:
+    name: tomcat
+    state: restarted
